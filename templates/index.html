@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        {% block contents %}
+       <h2>Welcome to Bookr</h2> 
+
+       {% for books in book %}
+       <div class="card text-start">
+         <img class="card-img-top" src="{{ books.cover.url }}" alt="Title">
+         <div class="card-body">
+           <h4 class="card-title"> <p><a href="{% url 'details' books.id %}">Title: {{books.title|title}}</a><br></h4>
+           <p class="card-text">Publication Date: {{books.publication_date}}</p>
+           <p>ISBN: {{books.isbn}}<p>
+            {% for contributor in book.contributors.all %}
+   <p> Contributor: {{contributor.first_names}}</p>
+   {% endfor %}
+   <p> Publisher: {{book.publisher.website}}</p>
+
+         </div>
+       </div>
+  
+    <br>
+    
+</p>
+
+    {% endfor %}
+   <img src="{% static 'images/download.jpeg' %} " />
+   {% for cont in contributor %}
+{{cont.first_names}}
+{% endfor %}
+   {% endblock contents %}
+        <script src="" async defer></script>
+    </body>
+</html>

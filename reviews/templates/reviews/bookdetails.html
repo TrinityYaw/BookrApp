@@ -1,0 +1,20 @@
+{% extends 'reviews/base.html' %}
+
+{% block title %} {{books.title}} {% endblock title %}
+{% block contents %}
+<div class="container">
+<p>
+    <h3>Book Title:{{books.title}}</h3></p>
+<br>
+<p>Publication Date: {{books.publication_date}}</p>
+<br>
+<p>ISBN: {{books.isbn}}</p>
+<p> 
+    <h3>Book Cover: </h3>
+    <img style="width:50%;height:20%" class="img img-thumbnail" src="{{ books.cover.url }}"> 
+
+</p>
+
+</div>
+
+{% endblock contents %}

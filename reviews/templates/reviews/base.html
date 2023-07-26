@@ -1,0 +1,149 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title> {% block title %}Base HTML{% endblock title %} </title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static 'css/bs.css' %}">
+        <link rel="stylesheet" href="{% static 'css/index.css' %}">
+
+    </head>
+{% block style %}
+
+{% endblock style %}
+
+    <body>
+      
+       
+        <div class="container">
+            {% block header %}
+            <header>
+                {% if user.is_authenticated %}
+                <div class="px-3 py-2 bg-dark text-white">
+                  <div class="container">
+                    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                      <a href="{% url 'index' %}" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+                        <h3>Bookr Books</h3>
+                      </a>
+            
+                      <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+                        <li>
+                            <a href="{% url 'index' %}" class="nav-link text-secondary">
+
+                            <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#home"/></svg>
+                            Home
+                          </a>
+                        </li>
+                        <li>
+                          <a href="{% url 'profile' user.id %}" class="nav-link text-white">
+                            <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#speedometer2"/></svg>
+                            Profile
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#" class="nav-link text-white">
+                            <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#table"/></svg>
+                            Contact
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#" class="nav-link text-white">
+                            <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#grid"/></svg>
+                            About Us
+                          </a>
+                        </li>
+                       
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+{% else %}
+
+<div class="px-3 py-2 bg-dark text-white">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="{% url 'index' %}" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+            <h3>Bookr Books</h3>
+         
+        </a>
+
+        <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+          <li>
+            <a href="{% url 'index' %}" class="nav-link text-secondary">
+              <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#home"/></svg>
+              Home
+            </a>
+          </li>
+          
+          <li>
+            <a href="#" class="nav-link text-white">
+              <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#table"/></svg>
+              Contact
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-link text-white">
+              <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#grid"/></svg>
+              About Us
+            </a>
+          </li>
+         
+        </ul>
+      </div>
+    </div>
+  </div>
+
+{% endif %}
+                <div class="px-3 py-2 border-bottom mb-3">
+                  <div class="container d-flex flex-wrap justify-content-center">
+                    <form class="d-flex  col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto" method="GET" action="{% url 'search' %}">
+                        <input class="form-control me-2" type="search" name="q" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-primary" type="submit">Search</button>
+                      </form>
+                     
+                    <div class="text-end">
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'logout' %}" class="btn btn-primary text-dark me-2">Logout</a>
+
+                        {% else %}
+                      <a href="{% url 'login' %}" class="btn btn-light text-dark me-2">Login</a>
+                      <a href="{% url 'register' %}" class="btn btn-primary">Sign-up</a>
+
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </header>
+              {% endblock header %}
+        
+        
+              {% block contents %}
+        {% endblock contents %}
+        
+
+{% block footer %}
+<div class="b-example-divider"></div>
+<div class="container">
+
+<div class="bg-dark text-secondary px-4 py-5 mt-4 text-center ">
+  <div class="py-5">
+    <h1 class="display-5 fw-bold text-white">Dark mode hero</h1>
+    <div class="col-lg-6 mx-auto">
+      <p class="fs-5 mb-4">Footer</p>
+      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        <button type="button" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Custom button</button>
+        <button type="button" class="btn btn-outline-light btn-lg px-4">Secondary</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock footer %}
+
+        <script src="" async defer></script>
+    </body>
+</html>

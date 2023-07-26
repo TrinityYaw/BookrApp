@@ -1,0 +1,64 @@
+{% extends 'reviews/base.html' %}
+
+{% block title %} {{books.title}} {% endblock title %}
+
+{% block contents %}
+{% comment "" %}
+<form method="GET">
+  <input type="text" name="q" id="" aria-describedby="helpId" placeholder="Search">
+
+Search in <p>
+    <label for="id_favorite_book">Favorite Book
+    </label><br>
+    <select id="id_favorite_book" name=
+    "favorite_book">
+ 
+    <option value="1">Title</option>
+    <option value="2">ISBN</option>
+    <option value="2">Contributor</option>
+    
+    </select>
+    </p>
+    
+
+<input type="submit">
+
+</form>{% endcomment %}
+<div class="container py-4">
+
+<p> Results for {{search_text}}</p>
+{% for book in query %}
+
+{{forloop.counter}}
+  
+  
+<div class="col">
+  <div class="card">
+    <div class="row g-0">
+      <div class="col-md-4">
+      <img src="{{book.cover.url}}" width="150px" height="200px" /> 
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title"><a href="{% url 'details' book.id %}">{{book.title}}</a><br></h5>
+          <p class="card-text"><span>Book ISBN:</span> {{book.isbn}}</p>
+          <p class="description"><span>Voluptatibus commodi ipsum voluptates optio consectetur, dolores numquam odit aspernatur iure sunt nulla, temporibus illum pariatur.<span></p>
+          <p class="card-text"><small class="text-muted">Ratings *****</small></p>
+        </div>
+      </div>
+    
+</div>
+</div>
+</div><!--ends col-->
+
+
+
+
+{%empty%}
+
+Books were not found<br>
+Try searching for another using another word, or term
+  {% endfor %}
+</div>
+
+  {% endblock contents %}

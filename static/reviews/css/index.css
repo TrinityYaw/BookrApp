@@ -1,0 +1,49 @@
+.input{
+border-radius: .25rem;
+    margin:10px;
+    border: 1px solid rgb(150, 149, 149);
+    padding: 5px;
+}
+
+.input:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: #86b7fe;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
+}
+
+.form{
+    width: 50% !important;
+}
+.pstore{
+color:#9acd32;
+text-transform: uppercase;
+
+}
+
+.cat-heading{
+    margin:50px;
+}
+
+.arrivals{
+    margin:30px;
+}
+
+.lorem{
+    text-align: justify
+}
+
+.aboutus_content{
+    text-align: justify;
+}
+
+.images-library{
+    width:150px !important;
+    height:200px !important;
+}
+
+.blog-content{
+    border:2px solid #fefefe;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}

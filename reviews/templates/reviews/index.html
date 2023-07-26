@@ -1,0 +1,178 @@
+{% extends 'reviews/base.html' %}
+{% load static %}
+
+ 
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+       {% block title %} Welcome to Bookr{% endblock title %}
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+{% block style %}
+<style>
+
+</style>
+{% endblock style %}
+
+    <body>
+        {% block contents %}
+        <div class="container">
+       
+
+       {% comment "" %}
+{% if  user.is_authenticated %}
+Welcome to  Bookr, {{user|upper}}
+<a href="{% url 'profile' user.id %}">Profile</a>
+<p> <a href="{% url 'logout' %}">Logout</a> </p>
+{% else %}
+<p> <a href="{% url 'login' %}">Login</a> </p>
+
+
+{% endif %}
+{% endcomment %}
+<div class="section py-5">
+<div class="row">
+<div class="col-lg-4 col-sm-4">
+<h3>WELCOME TO<p class="pstore">BOOKR STORE</p></h3>
+<p class="lorem"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+<p><a class="btn btn-danger">Learn More</a></p>
+</p>
+</div> 
+
+<div class="col-lg-8 col-sm-8">
+<img src="{% static 'images/cross.webp' %}" class="img-fluid"/>
+</div>
+</div>
+</div><!--ends section-->
+
+      <div class="featured">
+<h2 class="text-center cat-heading text-decoration-underline text-success">Featured Books</h2>
+
+
+<div class="card-group">
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for books in featured %}
+    <div class="col">
+      <div class="card h-100" style="border:2px solid #fefefe;box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);">
+        <img style="width:150px;height:200px" class="img-thumbnail images-library" src="{{ books.cover.url }}" alt=" {{books.title}} ">
+
+        <div class="card-body">
+          <h5 class="card-title">Ratings: </h5>
+       <a class="bnt btn-light" href="{% url 'details' books.id %}">Title: {{books.title|title}}</a><br>
+       
+        </div>
+        
+      </div>
+    </div>
+    {% endfor %}
+</div>
+
+      </div><!--ends featured-->
+     <div class="m-4"> <hr class="m-4"></div>
+      
+      <div class="arrivals"><!-- arrivals-->
+        <h2 class="text-center cat-heading text-decoration-underline text-success">New Arrivals</h2>
+        
+        <div class="row">
+            {% for books in new_arrivals %}
+        <div class="col-lg-3 col-md-3 my-2" style="border:2px solid #fefefe;box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);">
+            <img style="width:150px;height:200px;align:center" class="img-fluid images-library" src="{{ books.cover.url }}" alt=" {{books.title}} ">
+            <div class="card-body">
+                <h5 class="">New Arrivals</h5>
+             {% comment "" %} <a class="btn btn-primary" href="{% url 'details' books.id %}">Title: {{books.title|title}}</a><br>
+              
+           {% endcomment %} 
+               
+        
+        
+        </div>
+        </div>
+        {% endfor %}
+              </div><!--ends arrivals-->
+
+      <hr>
+<h2 class="text-center cat-heading"> Other Books</h2>
+        <div class="row">
+            {% for books in book %}
+            <div class="col-lg-3 col-md-3 my-2 py-3"  style="border:2px solid #fefefe;box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);">
+            
+         <img style="width:150px;height:200px" class="img-fluid" src="{{ books.cover.url }}" alt=" {{books.title}} ">
+         <div class="body">
+            <a  href="{% url 'details' books.id %}">Title: {{books.title|title}}</a><br>
+           
+          <!--<p class="card-text">Publication Date: {{books.publication_date}}</p>
+           <p>ISBN: {{books.isbn}}<p>--> 
+            {% for contributor in book.contributors.all %}
+   <p> Contributor: {{contributor.first_names}}</p>
+   
+   <p> Publisher: {{book.publisher.website}}</p>
+   
+           </div>{% endfor %}
+         </div>
+       </div>
+  
+    <br>
+    
+
+
+    {% endfor %}
+  
+  
+
+
+<div class="container aboutus m-3">
+<div class="row">
+<div class="col-12 col-md-6 col-lg-6">
+    <img src="{% static 'images/download.jpeg' %}" class="" />
+</div>
+
+
+<div class="col-12 col-md-6 col-lg-6 my-3">
+<h3 class="">About Us</h3>
+<div class="aboutus_content">
+
+    Sit aliquam delectus, hic consequatur atque rem molestias saepe quisquam quaerat necessitatibus, totam quaerat eos veritatis, maxime ipsam expedita consequuntur doloremque beatae facilis nesciunt dolor id magnam distinctio, blanditiis repudiandae voluptate qui magni vel deserunt maxime itaque quidem.
+</div>
+</div>
+</div>
+</div><!--ends container for about us-->
+<hr>
+<div class="blog-header my-5 text-center"><h4>BLOG</h4></div>
+<div class="container">
+<div class="row" >
+{% for blogs in blog %}
+    
+    <div class="col-lg-4">
+        <div class="card">
+          <div class="row g-0">
+            
+            <img class="card-img-top" src="{{ blogs.images.url }}"  /> 
+            
+            
+              <div class="card-body">
+                <h5 class="card-title"><a href="{% url 'blog' blogs.slug %}">{{blogs.title}}</a><br></h5>
+                
+               <p> {{blogs.contents | slice:'49'}}</p>
+             <a class="btn btn-primary stretched-links">Read More...</a>
+            </div>
+          
+      </div>
+      </div>
+      </div><!--ends col-->
+    
+    {% endfor %}
+
+</div>
+</div>
+
+
+</div><!--ends container-->
+   {% endblock contents %}
+        <script src="" async defer></script>
+    </body>
+</html>

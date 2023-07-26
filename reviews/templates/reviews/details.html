@@ -1,0 +1,65 @@
+{% extends 'reviews/base.html' %}
+
+{% block title %} {{books.title}} {% endblock title %}
+{% block contents %}
+<p>
+    <h3>Book Title:{{books.title}}</h3></p>
+<br>
+<p>Publication Date: {{books.publication_date}}</p>
+<br>
+<p>ISBN: {{books.isbn}}</p>
+<p> 
+    <h3>Book Cover: </h3>
+    <img style="width:50%;height:20%" class="img img-thumbnail" src="{{ books.cover.url }}"> 
+
+</p>
+<p>
+    <h3>Download</h3>
+   <a href="{% url 'download_pdf' pk=books.pk %}">Download PDF</a>
+</p>
+<div class="col-md-4">
+<p>Check other books by the same other</p>
+
+
+    {% for contributor in cont %}
+   
+<h4> {{contributor.role}} </h4>
+<h4> {{contributor.contributor}} </h4>
+
+
+
+{%empty%}
+
+<h4> No Contributor found </h4>
+
+{% endfor %}
+
+</div>
+
+{% for allBook in allBooks %}
+<p> {{allBook.title}} </p>
+<img style="width:30%;height:20%" class="img img-thumbnail" src="{{ allBook.cover.url }}"> 
+
+
+{% endfor %}
+
+<form method="post" action="{% url 'details' books.id %}">
+    {% csrf_token %}
+<p>
+<label for="id_review_text">Your Review</label><br/>
+<textarea id="id_review_text" name="review_text"
+placeholder="Enter your review"></textarea>
+</p>
+<p>
+<label for="id_rating">Rating</label><br/>
+<input id="id_rating" type="number" name="rating"
+placeholder="Rating 1-5">
+</p>
+<p>
+<button type="submit">Create Review</button>
+</p>
+</form>
+
+
+
+{% endblock contents %}

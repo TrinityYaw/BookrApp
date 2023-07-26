@@ -1,0 +1,42 @@
+{% extends 'reviews/base.html' %}
+
+{% block title %}Register Page{% endblock title %}
+
+{% block contents %}
+<div class="b-example-divider"></div>
+
+<div class="container col-xl-10 col-xxl-8 px-4 py-5">
+  <div class="row align-items-center g-lg-5 py-5">
+    <div class="col-lg-5 text-center text-lg-start">
+      <h1 class="display-4 fw-bold lh-1 mb-3">Bookr </h1>
+      <p class="col-lg-10 fs-4">Adipisci libero obcaecati culpa quidem minus laboriosam tempora, quaerat nulla obcaecati placeat sed aliquid optio vero nemo incidunt illo ratione, quod vel voluptatum unde ab accusantium amet modi optio dignissimos? </p>
+    </div>
+    <div class="col-md-10 mx-auto col-lg-7">
+      <form class="p-4 p-md-5 border rounded-3 bg-light" method="POST">
+        <div class="form-floating mb-3">
+           
+                <h5> Create An Account</h5>
+                {% csrf_token %}
+                
+                {{form.as_p}}
+                
+                <input type="submit" class="btn btn-primary" value="Register">
+                <p class="text-center">Have an account? <br>
+                    <a href="{% url 'login' %}">Login</a>
+                
+               
+        <hr class="my-4">
+        <small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="container">
+
+</div>
+{% endblock contents %}
+
+
+
+
+

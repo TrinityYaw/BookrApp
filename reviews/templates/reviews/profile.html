@@ -1,0 +1,48 @@
+{% extends 'reviews/base.html' %}
+
+{% block contents %}
+
+
+<div class="container">
+
+{% if user %}
+
+
+<h2>{{profile | title}} Books Uploaded</h2>
+<a class="btn btn-primary" href="{% url 'upload' user.id %}">Upload a Book</a>
+
+<div>
+<p>You have a total of <span class="badge rounded-pill bg-primary">{{book_count}}</span> Books </p>
+
+</div>
+{% for books in uploaded_books %}
+
+{{forloop.counter}} <p>Title: {{ books.title }}</p>
+
+    <h3>Book Cover: </h3>
+    
+    <div class="row">
+    <div class="col-lg-4 col-md-4">
+        
+    <img style="" class="img img-thumbnail" src="{{ books.cover.url }}"> 
+    </div>
+    <br>
+   <p> <a href="{% url 'book_details' books.id %}" class="btn btn-primary"> Details</a>
+    <a href="{% url 'update' books.id %}" class="btn btn-success"> Update</a>
+     <a href="{% url 'delete' books.id %}" class="btn btn-danger"> Delete</a></p>
+{%empty%}
+<p>Books uploaded will show here</p>
+<p> You have no Books Uploaded cuurently</p>
+    {% endfor %}
+
+   
+    </div><!--ends row-->
+</div><!--ends container-->
+
+
+
+
+
+{% endif %}
+</div>
+{% endblock contents %}
