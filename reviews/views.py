@@ -9,6 +9,7 @@ from django.contrib.auth import logout,login,authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .ratings import ratingCalc
+from django.contrib import messages
 
 def index(request):
         book = Book.objects.all()
@@ -140,10 +141,11 @@ def loginform(request):
     
     user = authenticate(request,username=username,password=password)
     
-    if user:
+    if user is not None:
         login(request,user)
         return redirect('index')
     else:
+          
         return render(request,"reviews/login.html")
     
     return render(request, "reviews/login.html")
